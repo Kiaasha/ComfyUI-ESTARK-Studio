@@ -33,3 +33,20 @@ Using our custom **Progressive Warm-up** engine, the nodes start processing with
 2. **Python Libraries:** Ensure you have the required libraries installed:
    ```bash
    pip install opencv-python numpy Pillow
+
+   ## 📦 Dependencies & Installation
+* **FFmpeg:** You **must** have FFmpeg installed and accessible in your system's PATH (used by the ESTARK Muxer).
+* **Base RIFE Node:** The ESTARK RIFE node acts as a smart memory manager over the standard RIFE engine. You must have [ComfyUI-Frame-Interpolation](https://github.com/Fannovel16/ComfyUI-Frame-Interpolation) installed.
+
+## ⚠️ Known Limitations
+* **Minimum VRAM:** While ESTARK manages memory intelligently, video upscaling is inherently heavy. A minimum of 8GB VRAM is recommended.
+* **Formats:** Currently, the Hybrid Loader and Muxer perform best with standard video formats (`.mp4`, `.mkv`, `.mov`).
+
+## 🤝 Call for Feedback & Collaboration
+This is my first custom node development for ComfyUI. I built it to save my own projects, but I know it can be improved. 
+If you are a developer, video editor, or AI creator, please test this on your rigs. I am actively looking for feedback, bug reports (Issues), and Pull Requests to make this tool even better for the community.
+
+*Included in this repository is a `workflow.json` and a screenshot of the canvas. Just drag, drop, and render.*
+
+---
+**License:** MIT License
