@@ -50,3 +50,5 @@ If you are a developer, video editor, or AI creator, please test this on your ri
 
 ---
 **License:** MIT License
+
+comfyui, comfyui-nodes, video-processing, vram-optimization, ai-video
