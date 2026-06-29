@@ -1,0 +1,274 @@
+{
+  "id": "45ce022d-4f0c-421d-9897-52cecf2ab33c",
+  "revision": 0,
+  "last_node_id": 31,
+  "last_link_id": 26,
+  "nodes": [
+    {
+      "id": 22,
+      "type": "ESTARK_DynamicBatchUpscaler",
+      "pos": [
+        -3406.6037603651953,
+        4021.9090232922304
+      ],
+      "size": [
+        432.11767835162743,
+        102
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video_path",
+          "type": "STRING",
+          "link": 22
+        },
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "frames_folder_path",
+          "type": "STRING",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ESTARK_DynamicBatchUpscaler"
+      },
+      "widgets_values": [
+        "/home/kiavash/Desktop/Temp/Result/",
+        5
+      ]
+    },
+    {
+      "id": 31,
+      "type": "ESTARK_DynamicBatchRIFE",
+      "pos": [
+        -2942.028443460463,
+        3969.023453690809
+      ],
+      "size": [
+        321.6600036621094,
+        150
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "frames_folder_path",
+          "type": "STRING",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "rife_frames_folder",
+          "type": "STRING",
+          "links": [
+            24
+          ]
+        },
+        {
+          "name": "fps_multiplier",
+          "type": "INT",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ESTARK_DynamicBatchRIFE"
+      },
+      "widgets_values": [
+        "rife49.pth",
+        2,
+        5,
+        true
+      ]
+    },
+    {
+      "id": 29,
+      "type": "ESTARK_VideoMuxer",
+      "pos": [
+        -2543.3300592136384,
+        3863.1484167645403
+      ],
+      "size": [
+        240.18000030517578,
+        66
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "rife_frames_folder",
+          "type": "STRING",
+          "link": 24
+        },
+        {
+          "name": "original_video_path",
+          "type": "STRING",
+          "link": 26
+        },
+        {
+          "name": "fps_multiplier",
+          "type": "INT",
+          "link": 25
+        }
+      ],
+      "outputs": [
+        {
+          "name": "final_mp4_path",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ESTARK_VideoMuxer"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 28,
+      "type": "ESTARK_HybridLoader",
+      "pos": [
+        -3791.161377983361,
+        3885.784039446716
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "original_video_path",
+          "shape": 6,
+          "type": "STRING",
+          "links": [
+            22,
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ESTARK_HybridLoader"
+      },
+      "widgets_values": [
+        "/home/kiavash/Desktop/Temp"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        -3794.0422836671596,
+        4037.8074106943077
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.2",
+        "Node name for S&R": "UpscaleModelLoader"
+      },
+      "widgets_values": [
+        "RealESRGAN_x2.pth"
+      ]
+    }
+  ],
+  "links": [
+    [
+      14,
+      5,
+      0,
+      22,
+      1,
+      "UPSCALE_MODEL"
+    ],
+    [
+      22,
+      28,
+      0,
+      22,
+      0,
+      "STRING"
+    ],
+    [
+      23,
+      22,
+      0,
+      31,
+      0,
+      "STRING"
+    ],
+    [
+      24,
+      31,
+      0,
+      29,
+      0,
+      "STRING"
+    ],
+    [
+      25,
+      31,
+      1,
+      29,
+      2,
+      "INT"
+    ],
+    [
+      26,
+      28,
+      0,
+      29,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917354,
+      "offset": [
+        4125.306750345228,
+        -3512.5333613751345
+      ]
+    },
+    "frontendVersion": "1.45.19",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
