@@ -1,0 +1,13 @@
+[project]
+name = "estark-studio"
+description = "Crash-proof video pipeline: dynamic batch upscaling and RIFE interpolation that adapt to available VRAM."
+version = "1.0.0"
+license = { file = "LICENSE" }
+dependencies = ["opencv-python"]
+
+[project.urls]
+Repository = "https://github.com/Kiaasha/ComfyUI-ESTARK-Studio"
+
+[tool.comfy]
+PublisherId = "kiaasha"
+DisplayName = "ESTARK Studio"
