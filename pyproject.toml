@@ -1,7 +1,7 @@
 [project]
 name = "estark-studio"
 description = "Crash-proof video pipeline: dynamic batch upscaling and RIFE interpolation that adapt to available VRAM."
-version = "1.0.0"
+version = "1.1.0"
 license = { file = "LICENSE" }
 dependencies = ["opencv-python"]
 
