@@ -1,0 +1,236 @@
+{
+  "id": "c23bdef5-1b0c-4ac7-9528-5e5e111ece67",
+  "revision": 0,
+  "last_node_id": 3,
+  "last_link_id": 2,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "ESTARK_HybridLoader",
+      "pos": [
+        60,
+        80
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "input_path",
+          "name": "input_path",
+          "type": "STRING",
+          "widget": {
+            "name": "input_path"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "original_video_path",
+          "name": "original_video_path",
+          "shape": 6,
+          "type": "STRING",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "Kiaasha/ComfyUI-ESTARK-Studio",
+        "ver": "f25df054c13700abe239171d2dcd86752c9942e3",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "Node name for S&R": "ESTARK_HybridLoader"
+      },
+      "widgets_values": [
+        "/path/to/video_or_folder"
+      ],
+      "widgets_values_named": {
+        "input_path": "/path/to/video_or_folder"
+      }
+    },
+    {
+      "id": 2,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        60,
+        260
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model_name",
+          "name": "model_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "UPSCALE_MODEL",
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.42.2",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "Node name for S&R": "UpscaleModelLoader"
+      },
+      "widgets_values": [
+        "4x-ClearRealityV1.pth"
+      ],
+      "widgets_values_named": {
+        "model_name": "4x-ClearRealityV1.pth"
+      }
+    },
+    {
+      "id": 3,
+      "type": "ESTARK_VideoUpscaleStream",
+      "pos": [
+        480,
+        120
+      ],
+      "size": [
+        314.3091796875,
+        150
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "video_path",
+          "name": "video_path",
+          "type": "STRING",
+          "link": 1
+        },
+        {
+          "localized_name": "upscale_model",
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 2
+        },
+        {
+          "localized_name": "rife_ckpt",
+          "name": "rife_ckpt",
+          "type": "COMBO",
+          "widget": {
+            "name": "rife_ckpt"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "multiplier",
+          "name": "multiplier",
+          "type": "INT",
+          "widget": {
+            "name": "multiplier"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "output_folder",
+          "name": "output_folder",
+          "type": "STRING",
+          "widget": {
+            "name": "output_folder"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "keep_vram_free_percent",
+          "name": "keep_vram_free_percent",
+          "type": "INT",
+          "widget": {
+            "name": "keep_vram_free_percent"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "final_mp4_path",
+          "name": "final_mp4_path",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "Kiaasha/ComfyUI-ESTARK-Studio",
+        "ver": "f25df054c13700abe239171d2dcd86752c9942e3",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {}
+        },
+        "Node name for S&R": "ESTARK_VideoUpscaleStream"
+      },
+      "widgets_values": [
+        "rife49.pth",
+        2,
+        "/path/to/output",
+        5
+      ],
+      "widgets_values_named": {
+        "rife_ckpt": "rife49.pth",
+        "multiplier": 2,
+        "output_folder": "/path/to/output",
+        "keep_vram_free_percent": 5
+      }
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      3,
+      0,
+      "STRING"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      1,
+      "UPSCALE_MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.45,
+      "offset": [
+        -173.56900133680938,
+        -3.2902086092593095
+      ]
+    },
+    "ue_links": []
+  },
+  "version": 0.4
+}

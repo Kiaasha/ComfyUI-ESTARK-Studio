@@ -6,6 +6,8 @@
 Just want to jump in? Download the workflow and drag it into ComfyUI:
 [⬇️ Download ESTARK workflow.json](workflow.json)
 
+**Recommended:** [⬇️ Download the one-pass Stream workflow](workflow_stream.json): video in, upscaled and interpolated `.mp4` out, nothing written to disk in between.
+
 ![ESTARK Studio Workflow](screenshot.png)
 
 ---
@@ -22,6 +24,13 @@ That’s why I built **ESTARK Studio**. It’s not about making your hardware st
 ESTARK Studio trades maximum hardware utilization for **100% bulletproof stability**. 
 Using our custom **Progressive Warm-up** engine, the nodes start processing with a tiny batch size (e.g., 2 frames) to safely measure your GPU's real-time memory consumption. It then calculates a strict safety margin (leaving ~20% of VRAM free to prevent fragmentation) and automatically locks into the highest *safe* batch size. No more OOM anxiety.
 
+## ⚡ New: ESTARK Video Upscale (Stream)
+One node does the whole job in a single pass: decode → upscale → RIFE → `FFmpeg`. Frames stay on the GPU until they are piped to the encoder, so there are no intermediate PNG folders and RAM use stays flat however long the video is. Batch sizes for both stages are measured on your GPU; on an OOM it halves the batch, then falls back to tiled upscaling (or a coarser RIFE flow scale) instead of crashing. Set `multiplier` to 1 to upscale only.
+
+Measured on an RTX A5000 Laptop (16 GB): a 12 s 864x480 clip → 3456x1920 at 48 fps with `4x-ClearRealityV1` + `rife49` in 52 s, RAM peak 3.9 GB, no temporary files.
+
+The original four-node folder pipeline is still included. It now reads videos as a stream, writes PNGs on worker threads, runs fp16 when the model supports it, can be cancelled, and stops before the disk fills up.
+
 ## ✨ Key Features
 * 📂 **Batch Folder Processing:** Give it a single video OR a folder full of videos. ESTARK automatically finds them, queues them, and processes the entire directory.
 * 🛡️ **Auto-Gearing Engine:** Dynamically shifts batch sizes based on your available VRAM. It catches OOM risks before they happen.
@@ -30,13 +39,9 @@ Using our custom **Progressive Warm-up** engine, the nodes start processing with
 
 ## 📦 Dependencies & Installation
 1. Clone or download this repository into your `ComfyUI/custom_nodes/` directory.
-2. **Python Libraries:** Ensure you have the required libraries installed:
-   ```bash
-   pip install opencv-python numpy Pillow
-
-   ## 📦 Dependencies & Installation
-* **FFmpeg:** You **must** have FFmpeg installed and accessible in your system's PATH (used by the ESTARK Muxer).
-* **Base RIFE Node:** The ESTARK RIFE node acts as a smart memory manager over the standard RIFE engine. You must have [ComfyUI-Frame-Interpolation](https://github.com/Fannovel16/ComfyUI-Frame-Interpolation) installed.
+2. **Python Libraries:** `pip install opencv-python numpy`
+3. **FFmpeg:** You **must** have FFmpeg installed and accessible in your system's PATH (used by the Stream node and the Muxer).
+4. **Base RIFE Node:** The ESTARK RIFE nodes use the RIFE engine from [ComfyUI-Frame-Interpolation](https://github.com/Fannovel16/ComfyUI-Frame-Interpolation), which must be installed.
 
 ## ⚠️ Known Limitations
 * **Minimum VRAM:** While ESTARK manages memory intelligently, video upscaling is inherently heavy. A minimum of 8GB VRAM is recommended.
